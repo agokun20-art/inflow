@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+# >100 MB (GitHub per-file limit) - regenerate with: python src/render.py video + ffmpeg mux (see docs §12)
+output/*_master.mp4
+# regenerable intermediates: python src/audio.py / python src/build_docs.py --refs
+output/audio/stem_*.wav
+output/shot_refs/
+output/_segments/
+output/_video_only.mp4
