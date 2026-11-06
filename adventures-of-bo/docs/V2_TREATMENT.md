@@ -69,3 +69,26 @@ This sequence was chosen because it proves the four things v1 lacked in the leas
 - **Compute.** 4 CPU cores, no GPU. The proof renders at 1280×536 (2.39:1) at roughly 20–30 s per frame and is shown letterboxed in 1080p. A studio would render the episode at 4K on a GPU farm; the same scene files scale to that unchanged.
 - **Animation is keyed by code, not by an animator at a rig.** The acting principles are applied deliberately, but a professional animator's hand-polished arcs and spacing will still be better. Recommendation for the full episode: keep these assets and the treatment, and have a character animator (Blender or Maya) key the hero acting shots, with this pipeline handling fur, lighting and rendering.
 - **Sound is mixed by measurement.** I can't listen to my own mix; a human listening pass is required before lock.
+
+## 7. Results: critical evaluation of the proof sequence
+
+Deliverable: `output/v2/Adventures_of_Bo_E01_The_Stakeout_v2_proof.mp4` (19.0 s plus a 0.75 s tail; rendered 1280×536, finished letterboxed in 1080p; 48 kHz, -16 LUFS).
+
+### What works (verified in rendered frames, not assumed)
+| Area | Evidence |
+|---|---|
+| Real cinematography | 10 setups with distinct lenses, heights and angles: floor-level 28 mm wide, a three-quarter lean, a 100 mm eye ECU, a front medium, a whip-pan profile, a low close-up, an over-the-shoulder insert, a side wide, a frontal close-up. Depth of field, motion blur, eye-targeted focus. |
+| Fur that acts | 95k strands per frame lag on stops, flare in the whip, float at the leap apex, **bristle** on the startle and settle in the final close-up |
+| Readable comic beats | Creep → lean → nothing → deflate and turn away → *boop* freeze → whip-turn → standoff → back away → *boop* startle leap → deadpan → *boop* |
+| Environment and light | Dressed attic set, moonlit window with falling rain, warm practicals, real shadows and reflections; the alarm clock reads as the suspect from the first frame |
+| Sound | Sampled-orchestra score mickey-moused to the steps; silence before each boop; boops 7–31 dB above their beds, sample-accurate to picture |
+| Temporal stability | Frame-to-frame difference in a static hold is 0.88/255 luma, so no denoiser flicker |
+
+### What doesn't work yet
+1. **Squints don't read.** The rig narrows the eye shape but has no eyelids, so "one eye squints harder" and the narrowed-eyes standoff (shot 7a) read as plain round eyes. *Fix:* fur-covered eyelid shells that close over the eye.
+2. **Animation is keyed by code.** Timing and principles are deliberate, but spacing is even and arcs aren't hand-finessed; a character animator would make the lean, the deflate and the deadpan funnier.
+3. **Bo's colour drifts between setups**: warm brown-charcoal under the lamp (shot 5), blue-grey under the moon (shot 9). It needs a unifying grade pass against the cast lock sheet.
+4. **Shot 7b's foreground** (Bo's headband, defocused) reads as an abstract shape rather than over the shoulder.
+5. **Resolution and samples** are set by 4 CPU cores: 1280×536 at 16 spp, denoised and upscaled. The finest fur detail is softer than a 4K GPU render would be.
+6. **Scope:** only Bo is animated. Mimi, Pip and Blu are locked assets (`output/v2/cast_lock_sheet.png`) but their acting is unproven.
+7. **I can't hear the mix.** Levels are measured, not listened to; a human listening pass is required.
