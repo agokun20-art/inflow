@@ -257,7 +257,13 @@ def room_tone():
 def cam_dist_gain(t, src):
     """Level by distance from the active camera to a source (inverse-ish, clamped)."""
     sh = A.shot_at(t)
-    loc, tgt = sh.fn(t)
+    sp = getattr(sh, 'spec', None)
+    if sp:   # the solved camera actually used by the renderer
+        u = min(1, max(0, (t - sh.t0) / (sh.t1 - sh.t0)))
+        u = u * u * (3 - 2 * u)
+        loc = np.asarray(sp['loc0']) * (1 - u) + np.asarray(sp['loc1']) * u
+    else:
+        loc, _ = sh.fn(t)
     d = np.linalg.norm(np.asarray(loc) - np.asarray(src))
     return float(np.clip(0.35 / max(d, 0.08), 0.25, 2.2))
 

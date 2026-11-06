@@ -48,7 +48,7 @@ rain_map = handles['rain_map']
 
 H = 0.5 / A.FPS
 # per-shot lighting cheats (as a DP re-balances each setup); multipliers on base energy
-LIGHT_CHEATS = {'5': {'room_bounce': 3.2, 'fill': 2.0}, '6': {'room_bounce': 1.8}, '7a': {'moon': 0.45, 'room_bounce': 1.6},
+LIGHT_CHEATS = {'2': {'moon': 0.55, 'fill': 1.8, 'room_bounce': 1.4}, '5': {'room_bounce': 3.2, 'fill': 2.0}, '6': {'room_bounce': 1.8}, '7a': {'moon': 0.45, 'room_bounce': 1.6},
                 '7b': {'moon': 0.25}, '9': {'moon': 0.5, 'room_bounce': 1.6, 'fill': 1.8}, '3': {'moon': 0.8}}
 BASE_E = {o.name: o.data.energy for o in bpy.data.objects if o.type == 'LIGHT'}
 

@@ -88,6 +88,12 @@ def evaluate(spec, s, objectives):
         err += 0.02 * (max(0, lo - pitch) + max(0, pitch - hi)) ** 2
         if tgt[2] < 0.0:
             err += 10
+        if s.sid in FACE_SHOTS:     # lens must see Bo's face: within 60 deg of his facing direction
+            stf = A.state(t)
+            face = np.array([math.sin(stf['heading']), -math.cos(stf['heading'])])
+            v = loc[:2] - geo_at(t)['c'][:2]
+            ang = math.degrees(math.acos(np.clip(v @ face / (np.linalg.norm(v) + 1e-9), -1, 1)))
+            err += 0.004 * max(0, ang - 55) ** 2
         g = geo_at(t)
         for key, want in obj.items():
             if key == 'bo_h':
@@ -122,9 +128,9 @@ PLAN = {
               obj=[(0.2, {'bo': (-0.42, -0.08), 'clock': (0.82, -0.12, 0.6), 'bo_h': 0.30}),
                    (1.5, {'bo': (-0.3, -0.06), 'clock': (0.8, -0.12, 0.6)}),
                    (2.9, {'bo': (-0.18, -0.02), 'clock': (0.78, -0.12, 0.6), 'bo_h': 0.52})]),
-    '2': dict(aim='fixed', box=((0.2, 1.2), (-0.5, 0.6), (0.08, 0.2)), push=0.06, aim_box=((-0.2, 0.2), (0.05, 0.4), (0.08, 0.18)),
-              obj=[(3.3, {'bo_h': 0.55}), (4.9, {'eyes': (-0.3, 0.18), 'clock': (0.42, -0.22), 'bo_h': 0.6}),
-                   (6.2, {'eyes': (-0.22, 0.2), 'clock': (0.42, -0.22)})]),
+    '2': dict(aim='fixed', box=((0.25, 1.1), (0.45, 1.1), (0.09, 0.2)), push=0.05, aim_box=((-0.15, 0.2), (0.05, 0.35), (0.1, 0.18)),
+              obj=[(3.7, {'eyes': (0.15, 0.15), 'bo_h': 0.55}), (4.9, {'eyes': (0.12, 0.2), 'clock': (-0.45, -0.25, 0.6), 'bo_h': 0.62}),
+                   (6.2, {'eyes': (0.08, 0.22), 'clock': (-0.45, -0.25, 0.6)})]),
     '3': dict(aim='eyeL', box=((0.03, 0.3), (0.25, 0.5), (0.13, 0.24)), push=0.004, aim_box=((-0.004, 0.004), (-0.004, 0.004), (-0.003, 0.003)),
               obj=[(6.3, {'eyeL': (0.08, 0.05), 'eye_h': 0.42}), (7.3, {'eyeL': (0.08, 0.05), 'eye_h': 0.42})]),
     '4': dict(aim='fixed', box=((-0.2, 0.9), (0.2, 1.1), (0.08, 0.2)), push=0.05, aim_box=((-0.3, 0.2), (-0.4, 0.2), (0.08, 0.18)),
@@ -143,6 +149,7 @@ PLAN = {
 }
 
 
+FACE_SHOTS = {'2'}
 PLAN_PITCH = {'7b': (-40, -10), '7a': (5, 35), '1': (-8, 18)}
 
 
