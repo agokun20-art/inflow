@@ -7,3 +7,7 @@ output/audio/stem_*.wav
 output/shot_refs/
 output/_segments/
 output/_video_only.mp4
+# v2: regenerable render outputs and textures (python v2/textures.py, v2/render_stakeout.py, v2/sound_stakeout.py)
+v2/out/
+v2/tex/
+v2/__pycache__/
