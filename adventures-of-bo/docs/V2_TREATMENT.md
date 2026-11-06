@@ -84,6 +84,11 @@ Deliverable: `output/v2/Adventures_of_Bo_E01_The_Stakeout_v2_proof.mp4` (19.0 s 
 | Sound | Sampled-orchestra score mickey-moused to the steps; silence before each boop; boops 7–31 dB above their beds, sample-accurate to picture |
 | Temporal stability | Frame-to-frame difference in a static hold is 0.88/255 luma, so no denoiser flicker |
 
+### Fixed during review
+- Shot 1: the clock read as a green pill when seen side-on; it was turned 40° so the twin bells and dial read as an alarm clock.
+- Shot 2: the first camera showed the back of Bo's head during the lean. The camera was re-solved with a face-visibility constraint and the shot re-rendered (78 frames).
+- Previs caught two cameras rendering black (one inside Bo's body, one 4 cm from his eye) and an unlit silhouette in shot 5. All fixed before the final render.
+
 ### What doesn't work yet
 1. **Squints don't read.** The rig narrows the eye shape but has no eyelids, so "one eye squints harder" and the narrowed-eyes standoff (shot 7a) read as plain round eyes. *Fix:* fur-covered eyelid shells that close over the eye.
 2. **Animation is keyed by code.** Timing and principles are deliberate, but spacing is even and arcs aren't hand-finessed; a character animator would make the lean, the deflate and the deadpan funnier.
